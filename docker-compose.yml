@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080" # Map container port 8080 to host port 8080
+    depends_on:
+      - db # Ensures the db service starts first
+    networks:
+      - my-network
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=gouniadmin
+    ports:
+      - "5432:5432" # Optional: exposes PostgreSQL to the Mac host
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
