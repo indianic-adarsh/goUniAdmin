@@ -1,4 +1,4 @@
-basePath: /
+basePath: /api
 definitions:
   admin.Admin:
     properties:
@@ -61,11 +61,11 @@ info:
   contact:
     email: support@gouniadmin.com
     name: API Support
-  description: Admin panel API for goUniAdmin
+  description: Admin panel API for Go Uni Admin
   license:
     name: MIT
   termsOfService: http://swagger.io/terms/
-  title: goUniAdmin API
+  title: Go Uni Admin API
   version: "1.0"
 paths:
   /admins:
@@ -336,6 +336,8 @@ paths:
       summary: Get admin profile
       tags:
       - admins
+schemes:
+- http
 securityDefinitions:
   BearerAuth:
     in: header

@@ -1,0 +1,7 @@
+{
+    "invalid_request_body": "Invalid request body",
+    "failed_to_hash_password": "Failed to hash password",
+    "admin_not_found": "Admin not found",
+    "logged_in_successfully": "Logged in successfully",
+    "invalid_email_or_password": "Invalid email or password"
+}

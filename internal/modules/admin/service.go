@@ -29,21 +29,20 @@ func NewAdminService(db *db.DB, cfg *config.Config) *AdminService {
 	}
 }
 
-// Create adds a new admin
 func (s *AdminService) Create(admin Admin) (Admin, error) {
 	if err := ValidateAdmin(admin); err != nil {
 		return Admin{}, err
 	}
 
-	isExist, err := s.ReadByEmail(admin.EmailID)
-
-	if err != nil {
-		return Admin{}, err // Propagate the error if one occurred
+	var existingAdmin Admin
+	if err := s.db.Where("email_id = ? AND	is_deleted=?", admin.EmailID, false).First(&existingAdmin).Error; err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		return Admin{}, err // Database error
 	}
 
-	if isExist != (Admin{}) {
+	if existingAdmin.ID != uuid.Nil {
 		return Admin{}, errors.New("Email already exists")
 	}
+
 	if err := s.db.Create(&admin).Error; err != nil {
 		return Admin{}, err
 	}
@@ -56,7 +55,7 @@ func (s *AdminService) Read(id uuid.UUID) (Admin, error) {
 	result := s.db.Where("id = ? AND is_deleted = ?", id, false).First(&admin)
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return Admin{}, errors.New("admin not found")
+			return Admin{}, errors.New("Admin not found")
 		}
 		return Admin{}, result.Error
 	}

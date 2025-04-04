@@ -1,0 +1,7 @@
+{
+    "invalid_request_body": "Cuerpo de solicitud inválido",
+    "failed_to_hash_password": "Error al hashear la contraseña",
+    "admin_not_found": "Administrador no encontrado",
+    "logged_in_successfully": "Inicio de sesión exitoso",
+    "invalid_email_or_password": "Correo o contraseña inválidos"
+}

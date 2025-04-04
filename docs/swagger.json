@@ -1,8 +1,11 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
-        "description": "Admin panel API for goUniAdmin",
-        "title": "goUniAdmin API",
+        "description": "Admin panel API for Go Uni Admin",
+        "title": "Go Uni Admin API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
@@ -14,7 +17,7 @@
         "version": "1.0"
     },
     "host": "localhost:5000",
-    "basePath": "/",
+    "basePath": "/api",
     "paths": {
         "/admins": {
             "get": {

@@ -14,6 +14,9 @@ type DB struct {
 	*gorm.DB
 }
 
+// DBInstance is a global instance of the database connection
+var DBInstance *DB
+
 // NewDB initializes a new GORM database connection
 func NewDB(cfg *config.Config) (*DB, error) {
 	db, err := gorm.Open(postgres.Open(cfg.DATABASE_URL), &gorm.Config{})
@@ -31,5 +34,6 @@ func NewDB(cfg *config.Config) (*DB, error) {
 	}
 
 	log.Println("Connected to PostgreSQL database with URL: ", cfg.DATABASE_URL)
-	return &DB{db}, nil
+	DBInstance = &DB{db} // Assign the instance to the global variable
+	return DBInstance, nil
 }
